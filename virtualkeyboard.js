@@ -97,7 +97,6 @@ function openCloseKeyboard() {
     modal = setModal()
     toggleKeyboard(modal)
     initializeDragEvents(modal)
-    console.warn(modal.style.display)
 }
 
 function setModal() {
