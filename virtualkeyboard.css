@@ -1,0 +1,89 @@
+/***********Virtual Keyboard Modal***********/
+
+.bg-modal {
+    width: 584px;
+    /*    height: 28%;*/
+    height: 253px;
+    position: fixed;
+    display: none;
+    pointer-events: none;
+    z-index: 9999;
+    cursor: grab;
+    margin: 0;
+    transform: translate3d(0,0,0);
+    box-sizing: border-box;
+}
+
+.modal-content {
+    justify-content: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    pointer-events: auto !important;
+    background-color: #fff !important;
+    border: 3px solid rgba(0, 0, 0, .2) !important;
+    border-radius: .3rem !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+    resize: none !important;
+}
+
+/***********Keyboard buttons***********/
+
+
+.button.keyboard {
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button.keyboard:hover {
+            background-color: #0d9730;
+        }
+.keyboard {
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+    .keyboard button {
+        padding: 15px;
+        font-size: 18px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s;
+    }
+
+        .keyboard button:hover {
+            transform: scale(1.05);
+        }
+
+.rowk {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    
+}
+
+.btn-hover{
+    width:35px;
+}
+
+.btn-hover:hover {
+    background-color: #0d6efd;
+    transform: scale(1.05);
+}
+
+.buttonclose {
+    position: absolute;
+    left: 95%;
+    top: 2%;
+}
+
+
