@@ -12,6 +12,7 @@
     margin: 0;
     transform: translate3d(0,0,0);
     box-sizing: border-box;
+    top: 306px;
 }
 
 .modal-content {
@@ -19,8 +20,8 @@
     display: flex !important;
     flex-direction: column !important;
     pointer-events: auto !important;
-    background-color: #fff !important;
-    border: 3px solid rgba(0, 0, 0, .2) !important;
+    background-color: #ffffff !important;
+    border: 3px solid rgb(255, 0, 0) !important;
     border-radius: .3rem !important;
     width: 100% !important;
     height: 100% !important;

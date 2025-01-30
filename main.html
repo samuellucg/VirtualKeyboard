@@ -3,16 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="virtualkeyboard.css"/>
+	<title>Virtual Keyboard</title>
+	<link rel="stylesheet" href="bootstrap/bootstrap.css">
+	<link rel="stylesheet" href="html.css">
+	<link rel="stylesheet" href="virtualkeyboard.css">
+	<script src="bootstrap/bootstrap.js"></script>
+	<script src="newvk.js"></script>
 </head>
 <body>
-<div id="keyboardmod" class="bg-modal">
+	<div class="htest">
+		<p>Virtual Keyboard</p>
+		<button id="openkb" onclick="openKeyboard()" type="button" class="btn btn-primary">Open Keyboard</button>
+	</div>
+
+	<div id="searchbar" class="searchbar">
+		<input id="search-0"type="text" placeholder="search...">
+	</div>
+
+
+	<div id="keyboardmod" class="bg-modal">
 		<div class="modal-content">
 			<div class="buttonclose">
-				<button id="closekb" type="button" class="btn-close"></button>
+				<button id="closekb" onclick="closeKeyboard()" type="button" class="btn-close"></button>
 			</div>
-			<div class="">
+			<div>
 				<div class="rowk">
 					<button class="btn-hover" onclick="typeKey('1')">1</button>
 					<button class="btn-hover" onclick="typeKey('2')">2</button>
@@ -26,7 +40,6 @@
 					<button class="btn-hover" onclick="typeKey('0')">0</button>
 					<button class="btn-hover" onclick="typeKey('-')">-</button>
 					<button class="btn-hover" onclick="typeKey('.')">.</button>
-					@* <button id="closekb" class="btn btn-danger">X</button> *@
 				</div>
 				
 				<div class="rowk">
@@ -66,10 +79,11 @@
 					<button class="btn-hover" onclick="clearSearch()" style="width: unset;">Clear</button>
 					<button class="btn-hover" onclick="backspace()" style="width: unset;">⌫</button>
 				</div>
+				
 			</div>
 		</div>
 	</div>
 
-<script src="virtualkeyboard.js"></script>
+
 </body>
 </html>

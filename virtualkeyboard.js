@@ -2,6 +2,22 @@ let isDragging = false;
 let currentX = 0, currentY = 0, initialX = 0, initialY = 0, offsetX = 0, offsetY = 0;
 let modal;
 
+document.addEventListener("DOMContentLoaded", function () {
+    window.addEventListener("resize", () => {
+        const limits = updateLimits();
+        modal.style.display = "none"
+        currentX = Math.max(limits.minX, Math.min(currentX, limits.maxX));
+        currentY = Math.max(limits.minY, Math.min(currentY, limits.maxY));
+
+        setTranslate(currentX, currentY, modal);
+    });
+
+    document.getElementById("closekb").addEventListener("click", function () {
+        modal = setModal();
+        closeKeyboard();
+    });
+});
+
 function updateLimits() {
     if (!modal) return { minX: 0, maxX: 0, minY: 0, maxY: 0 };
 
@@ -30,15 +46,6 @@ function setInitialPosition() {
     currentY = initialYPos;
     setTranslate(currentX, currentY, modal);
 }
-
-window.addEventListener("resize", () => {
-    const limits = updateLimits();
-    modal.style.display = "none"
-    currentX = Math.max(limits.minX, Math.min(currentX, limits.maxX));
-    currentY = Math.max(limits.minY, Math.min(currentY, limits.maxY));
-
-    setTranslate(currentX, currentY, modal);
-});
 
 function initializeDragEvents(modalElement) {
     modal = modalElement;
@@ -88,19 +95,14 @@ function onMouseUp() {
 
 // Virtual Keyboard ↓.
 
-document.getElementById("closekb").addEventListener("click", function () {
-    modal = setModal();
-    closeKeyboard();
-})
-
 function openCloseKeyboard() {
-    modal = setModal()
-    toggleKeyboard(modal)
-    initializeDragEvents(modal)
+    modal = setModal();
+    toggleKeyboard(modal);
+    initializeDragEvents(modal);
 }
 
 function setModal() {
-    return document.getElementById("keyboardmod")
+    return document.getElementById("keyboardmod");
 }
 
 function isTabBars() {
@@ -115,41 +117,37 @@ function toggleKeyboard(mod) {
     }
 }
 
-function typeKey(key) {
-    let searchBar;
+function DefineSearchBar() {
     if (isTabBars()) {
-        searchBar = document.getElementById('dt-search-0');
+        return document.getElementById('dt-search-0');
     } else {
-        searchBar = document.getElementById('dt-search-1');
+        return document.getElementById('dt-search-1');
     }
+}
+
+function typeKey(key) {
+    const searchBar = DefineSearchBar();
+
     searchBar.value += key;
     filterTable();
 }
 
 function backspace() {
-    let searchBar;
-    if (isTabBars()) {
-        searchBar = document.getElementById('dt-search-0');
-    } else {
-        searchBar = document.getElementById('dt-search-1');
-    }
+    const searchBar = DefineSearchBar();
+
     searchBar.value = searchBar.value.slice(0, -1);
     filterTable();
 }
 
 function clearSearch() {
-    let searchBar;
-    if (isTabBars()) {
-        searchBar = document.getElementById('dt-search-0');
-    } else {
-        searchBar = document.getElementById('dt-search-1');
-    }
+    const searchBar = DefineSearchBar();
+
     searchBar.value = '';
     filterTable();
 }
 
 function filterTable() {
-    let input;
+    let input = '';
     if (isTabBars()) {
         input = document.getElementById('dt-search-0').value;
         $('#barsTable').DataTable().search(input).draw();
