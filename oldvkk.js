@@ -1,5 +1,4 @@
 let modal;
-
 document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("resize", () => {
         const limits = updateLimits();
@@ -52,6 +51,7 @@ function initializeDragEvents(modalElement) {
 
     modal.draggable({
         containment: "window",
+
         start: function () {
             modal.css("cursor", "grabbing");
             $("body").css("user-select", "none");
@@ -61,6 +61,34 @@ function initializeDragEvents(modalElement) {
             $("body").css("user-select", "");
         }
     });
+
+    modal.on("pointerdown", function (event) {
+        if (event.pointerType !== "touch") return;
+        const startX = event.pageX - modal.offset().left;
+        const startY = event.pageY - modal.offset().top;
+
+        const windowWidth = $(window).width();
+        const windowHeight = $(window).height();
+        const modalWidth = modal.outerWidth();
+        const modalHeight = modal.outerHeight();
+
+        $(document).on("pointermove", function (event) {
+            let newX = event.pageX - startX;
+            let newY = event.pageY - startY;
+
+            newX = Math.max(0, Math.min(newX, windowWidth - modalWidth));
+            newY = Math.max(0, Math.min(newY, windowHeight - modalHeight));
+
+            modal.css({ left: newX, top: newY });
+        });
+
+        $(document).on("pointerup", function () {
+            $(document).off("pointermove pointerup");
+        });
+
+        event.preventDefault();
+    });
+
 }
 
 // Virtual Keyboard ↓.
